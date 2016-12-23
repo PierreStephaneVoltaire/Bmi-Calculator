@@ -47,20 +47,20 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         boolean AllGood = false;
         double height = 0, weight = 0;
         if (WeightValue.trim().length() == 0 || Double.parseDouble(WeightValue) < 0) {
-            Weight.setError("please enter a valid number");
-            AllGood = false;
+            Weight.setError(getString(R.string.errorMessage));
+
         } else {
             weight = Double.parseDouble(WeightValue);
             AllGood = true;
         }
         if (HeightValue.trim().length() == 0 || Double.parseDouble(HeightValue) < 0) {
-            Height.setError("please enter a valid number");
+            Height.setError(getString(R.string.errorMessage));
             AllGood = false;
         } else {
             height = Double.parseDouble(HeightValue);
             AllGood = true;
         }
-        if (AllGood == true) {
+        if (AllGood) {
 
             if (CmOrFeet.isChecked()) {
                 double ft = Math.floor(height) * 0.3048;
