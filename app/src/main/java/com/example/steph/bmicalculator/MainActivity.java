@@ -102,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             builder.append("higher or equal to 30 .").append("This is considered being Obese");
         }
         ExtraInfo.setText(builder.toString());
-
-
     }
 
     @Override
