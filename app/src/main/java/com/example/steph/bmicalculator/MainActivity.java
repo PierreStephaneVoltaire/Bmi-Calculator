@@ -1,7 +1,7 @@
 package com.example.steph.bmicalculator;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
-    TextView resultTextView,Extrainfo;
+    TextView resultTextView, Extrainfo;
     EditText Weight, Height;
     double WeightMultiplier = 0.453592;
     double HeightMultiplier = 0.01;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         Weight = (EditText) findViewById(R.id.Weight);
         Height = (EditText) findViewById(R.id.Height);
         resultTextView = (TextView) findViewById(R.id.Result);
-        Extrainfo=(TextView)findViewById(R.id.Result);
+        Extrainfo = (TextView) findViewById(R.id.ExtraInfo);
 
     }
 
@@ -69,9 +69,30 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
             }
             double result = (weight * WeightMultiplier) / Math.pow((height * HeightMultiplier), 2);
-            resultTextView.setText("Your BMI is " + Math.round(result * 100) / 100.00);
-
+            displayResult(result);
         }
+    }
+
+    public void displayResult(double result) {
+        resultTextView.setText("Your BMI is " + Math.round(result * 100) / 100.00);
+        /*Underweight = <18.5
+Normal weight = 18.5–24.9
+Overweight = 25–29.9
+Obesity = BMI of 30 or greater*/
+        StringBuilder builder = new StringBuilder();
+        builder.append("Your BMI is ");
+        if (result <= 18.5) {
+            builder.append("lower or equal to 18.5 .").append("This is considered being Underweight");
+        } else if (result < 25) {
+            builder.append("somewhere between 18.5 and 24.9 .").append("This is considered being Normal");
+        } else if (result < 30) {
+            builder.append("somewhere between 25 and 29.9 .").append("This is considered being Overweight");
+        } else {
+            builder.append("higher or equal to 30 .").append("This is considered being Obese");
+        }
+        Extrainfo.setText(builder.toString());
+
+
     }
 
     @Override
